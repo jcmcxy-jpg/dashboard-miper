@@ -13,7 +13,7 @@ st.title("🛡️ Panel de Control Analítico - MIPER (Matriz de Riesgos)")
 st.markdown("**Automatización e Inteligencia Operativa**")
 
 # --- CARGA DE DATOS DESDE GOOGLE SHEETS (EN TIEMPO REAL) ---
-@st.cache_data(ttl=10)
+
 def cargar_datos_miper():
     sheet_id = "14MMoJZ3zCqzsMvo6ZDzt3lQn_j6-GhE-ysVDlL175Dg" 
     gid = "398981841"
