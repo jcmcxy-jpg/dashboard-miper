@@ -17,7 +17,7 @@ st.markdown("**Automatización e Inteligencia Operativa**")
 @st.cache_data(ttl=10)
 def cargar_datos_mipér():
     # Reemplaza 'TU_ID_DE_LA_HOJA' por el código que copiaste de tu URL de Google Sheets
-    sheet_id = "TU_ID_DE_LA_HOJA" 
+    sheet_id = "1f2NMBj2tuCVXwAIzd63dFwovVALPXVVH" 
     
     # URL de exportación directa a formato CSV de la primera pestaña o la que necesites
     url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv"
