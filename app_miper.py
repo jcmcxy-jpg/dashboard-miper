@@ -164,6 +164,6 @@ with c3:
         st.plotly_chart(fig_donut, use_container_width=True)
     else:
         st.info("Columna de eficacia no disponible o sin datos.")
-
 # --- TABLA DETALLADA ---
 st.subheader("📋 Detalle Filtrado de la Matriz MIPER")
+# Actualización forzada - v2
