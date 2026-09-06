@@ -16,7 +16,8 @@ st.markdown("**Automatización e Inteligencia Operativa**")
 @st.cache_data(ttl=10)
 def cargar_datos_miper():
     sheet_id = "14MMoJZ3zCqzsMvo6ZDzt3lQn_j6-GhE-ysVDlL175Dg" 
-    url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv"
+    gid = "398981841"
+    url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv&gid={gid}"
     
     df = pd.read_csv(url, header=9)
     df.columns = df.columns.astype(str).str.strip()
