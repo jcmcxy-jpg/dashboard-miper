@@ -12,23 +12,27 @@ st.set_page_config(
 st.title("🛡️ Panel de Control Analítico - MIPER (Matriz de Riesgos)")
 st.markdown("**Automatización e Inteligencia Operativa**")
 
-# --- CARGA DE DATOS DESDE LA FILA 10 ---
+# --- CARGA DE DATOS DESDE GOOGLE SHEETS (EN TIEMPO REAL) ---
+# ttl=10 hace que los datos se actualicen automáticamente cada pocos segundos al recargar
+@st.cache_data(ttl=10)
 def cargar_datos_mipér():
-    archivo_excel = "1. MIPER Exploración 2026 Final.xlsx"
-    hoja = "año26"
+    # Reemplaza 'TU_ID_DE_LA_HOJA' por el código que copiaste de tu URL de Google Sheets
+    sheet_id = "TU_ID_DE_LA_HOJA" 
     
-    # header=9 carga los títulos en la fila 10 del Excel
-    df = pd.read_excel(archivo_excel, sheet_name=hoja, header=9)
+    # URL de exportación directa a formato CSV de la primera pestaña o la que necesites
+    url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv"
+    
+    # header=9 mantiene tu tabla iniciando en la fila 10
+    df = pd.read_csv(url, header=9)
     df.columns = df.columns.astype(str).str.strip()
     return df
 
 try:
     df = cargar_datos_mipér()
-    st.sidebar.success("✅ Archivo MIPER cargado correctamente")
+    st.sidebar.success("✅ Conectado a Google Sheets en tiempo real")
 except Exception as e:
-    st.error(f"Error al leer el archivo Excel: {e}")
+    st.error(f"Error al conectar con Google Sheets: {e}")
     st.stop()
-
 # --- BUSCADOR INTELIGENTE DE COLUMNAS ---
 def encontrar_columna(lista_columnas, palabras_clave):
     for col in lista_columnas:
