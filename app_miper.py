@@ -15,7 +15,7 @@ st.markdown("**Automatización e Inteligencia Operativa**")
 # --- CARGA DE DATOS DESDE GOOGLE SHEETS (EN TIEMPO REAL) ---
 @st.cache_data(ttl=10)
 def cargar_datos_miper():
-    sheet_id = "1f2NMBj2tuCVXWAizd63dFwovVALPXVVH" 
+    sheet_id = "14MMoJZ3zCqzsMvo6ZDzt3lQn_j6-GhE-ysVDlL175Dg" 
     url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=csv"
     
     df = pd.read_csv(url, header=9)
