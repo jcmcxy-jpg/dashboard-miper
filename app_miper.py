@@ -167,4 +167,3 @@ with c3:
 # --- TABLA DETALLADA ---
 st.subheader("📋 Detalle Filtrado de la Matriz MIPER")
 # Actualización forzada - v2
-st.dataframe(df_filtered, use_container_width=True)
