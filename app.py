@@ -2,6 +2,42 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+# Configuración inicial de la página
+st.set_page_config(page_title="Dashboard MIPER", page_icon="🛡️", layout="wide")
+
+# --- SISTEMA DE AUTENTICACIÓN (LOGIN) ---
+if "autenticado" not in st.session_state:
+    st.session_state.autenticado = False
+
+def verificar_credenciales():
+    # Puedes cambiar aquí el usuario y contraseña corporativos que prefieras
+    usuario_valido = "admin"
+    password_valida = "Miper2026*"
+    
+    if st.session_state.username == usuario_valido and st.session_state.password == password_valida:
+        st.session_state.autenticado = True
+        st.success("¡Acceso concedido!")
+    else:
+        st.error("Usuario o contraseña incorrectos.")
+
+# Si el usuario NO está autenticado, mostramos la pantalla de login
+if not st.session_state.autenticado:
+    st.markdown("<h2 style='text-align: center; color: #0056b3;'>🛡️ Control de Acceso - Matriz MIPER</h2>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center;'>Por favor, ingrese sus credenciales corporativas para continuar.</p>", unsafe_allow_html=True)
+    
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        with st.form("login_form"):
+            st.text_input("Usuario", key="username")
+            st.text_input("Contraseña", type="password", key="password")
+            st.form_submit_button("Ingresar", on_click=verificar_credenciales)
+            
+    # Detenemos la ejecución aquí para que no cargue el resto de la app si no se ha logueado
+    st.stop()
+
+# ==========================================
+# A PARTIR DE AQUÍ VA TU APLICACIÓN NORMAL
+# ==========================================
 # --- CONFIGURACIÓN DE LA PÁGINA ---
 st.set_page_config(
     page_title="Dashboard MIPER - Matriz de Riesgos",
