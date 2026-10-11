@@ -5,16 +5,19 @@ import plotly.express as px
 # Configuración inicial de la página
 st.set_page_config(page_title="Dashboard MIPER", page_icon="🛡️", layout="wide")
 
-# --- SISTEMA DE AUTENTICACIÓN (LOGIN) ---
+# --- SISTEMA DE AUTENTICACIÓN DINÁMICO (VÍA SECRETS) ---
 if "autenticado" not in st.session_state:
     st.session_state.autenticado = False
 
 def verificar_credenciales():
-    # Puedes cambiar aquí el usuario y contraseña corporativos que prefieras
-    usuario_valido = "admin"
-    password_valida = "Miper2026*"
+    usuario_ingresado = st.session_state.username
+    password_ingresada = st.session_state.password
     
-    if st.session_state.username == usuario_valido and st.session_state.password == password_valida:
+    # Obtenemos los usuarios y contraseñas configurados en Streamlit Secrets
+    usuarios_permitidos = st.secrets.get("usuarios", {})
+    
+    # Validamos si el usuario existe y la contraseña coincide
+    if usuario_ingresado in usuarios_permitidos and usuarios_permitidos[usuario_ingresado] == password_ingresada:
         st.session_state.autenticado = True
         st.success("¡Acceso concedido!")
     else:
@@ -32,9 +35,16 @@ if not st.session_state.autenticado:
             st.text_input("Contraseña", type="password", key="password")
             st.form_submit_button("Ingresar", on_click=verificar_credenciales)
             
-    # Detenemos la ejecución aquí para que no cargue el resto de la app si no se ha logueado
     st.stop()
 
+# ==========================================
+# A PARTIR DE AQUÍ VA TU APLICACIÓN NORMAL
+# ==========================================
+
+st.title("📊 Panel Principal - Matriz MIPER")
+st.markdown("Bienvenido al sistema de optimización y gestión de riesgos.")
+
+# (Aquí continúa el resto de tu código de gráficos y conexión a Google Sheets)
 # ==========================================
 # A PARTIR DE AQUÍ VA TU APLICACIÓN NORMAL
 # ==========================================
